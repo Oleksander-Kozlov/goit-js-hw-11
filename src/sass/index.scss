@@ -18,10 +18,12 @@ img {
   
 }
 input {    
-    padding: 10px;
+    padding: 5px;
     min-height: 50px;
-    font-size: 32px;
-    text-align: center;
+    font-size: 30px;
+    text-align:center;
+    
+    
 
     background-color: rgb(243, 247, 246);
                 border-radius: 4px;
@@ -34,7 +36,7 @@ input {
 
              
 input:hover,input:focus{
-border: 5px solid rgb(234, 13, 246);
+border: 3px solid rgb(234, 13, 246);
 }
 
 .magnifying-glass {
