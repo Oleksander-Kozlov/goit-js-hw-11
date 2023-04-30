@@ -1,35 +1,39 @@
 function createCard(arr) {
-//  webformatURL - посилання на маленьке зображення для списку карток.
-// largeImageURL - посилання на велике зображення.
-// tags - рядок з описом зображення. Підійде для атрибуту alt.
-// likes - кількість лайків.
-// views - кількість переглядів.
-// comments - кількість коментарів.
-// downloads - кількість завантажень.
+
     return arr
       .map(
-        ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
-          `<a class="gallery__link" href="${largeImageURL}"><div class="photo-card">
-  <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        ({
+          webformatURL,
+          largeImageURL,
+          tags,
+          likes,
+          views,
+          comments,
+          downloads,
+        }) =>
+          `<div class="photo-card">
+          <a class="gallery__link" href="${largeImageURL}">
+  <img src="${webformatURL}" alt="${tags}" title=${tags} width="350px" height="250px" loading="lazy" />
   <div class="info">
     <p class="info-item">
       <b>Likes
-      ${likes}</b>
+      </b> ${likes}
     </p>
     <p class="info-item">
       <b>Views
-      ${views}</b>
+
+      </b> ${views}
     </p>
     <p class="info-item">
       <b>Comments
-      ${comments}</b>
+      </b> ${comments}
     </p>
     <p class="info-item">
       <b>Downloads
-      ${downloads}</b>
+      </b>${downloads}
     </p>
-  </div>
-</div></a>`
+  </div></a>
+</div>`
       )
       .join('');
 }
