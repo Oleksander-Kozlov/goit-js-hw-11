@@ -12,8 +12,8 @@ import { createCard, createCards } from "./helpers/createCards";
 
 // отримую HTML елементи
 const form = document.querySelector('#search-form');
+const galleryContainer = document.querySelector('.gallery');
 
-const target = document.querySelector('js-guard');
 const loadMoreBtn = document.querySelector('.load-more');
 let currentPage = 1;
 let gallery = new SimpleLightbox('.gallery a', {
