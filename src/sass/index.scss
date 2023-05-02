@@ -19,8 +19,9 @@ img {
   
 }
 input {    
+    
     padding: 5px;
-    min-height: 50px;
+    min-height: 60px;
     font-size: 30px;
     text-align:center;
     
@@ -52,6 +53,7 @@ border: 3px solid rgb(234, 13, 246);
     border: 5px solid slategray;
     border-radius: 50%;
     transition: background-color 500ms cubic-bezier(), box-shadow 500ms cubic-bezier()
+    
 }
 
 .magnifying-glass:after {
