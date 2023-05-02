@@ -31,7 +31,7 @@ function onSearch(evt) {
    fetchPictures(searchQuery.value)
     .then(datas => {
       const { hits, totalHits, total } = datas.data;
-    
+    // нотифікашка для неправильного вводу
       if (!hits.length) {
        return Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -52,6 +52,7 @@ function onSearch(evt) {
           behavior: 'smooth',
         });
       } 
+      // нотифікашка  кінця завантаження картинок
       if (total === hits.length) {
         observer.unobserve(target);
         return Notify.failure(
