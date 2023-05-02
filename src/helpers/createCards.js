@@ -1,17 +1,16 @@
 function createCards(arr) {
-
-    return arr
-      .map(
-        ({
-          webformatURL,
-          largeImageURL,
-          tags,
-          likes,
-          views,
-          comments,
-          downloads,
-        }) =>
-          `<div class="photo-card">
+  return arr
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) =>
+        `<div class="photo-card">
           <a class="gallery__link" href="${largeImageURL}">
   <img src="${webformatURL}" alt="${tags}" title=${tags} width="350px" height="250px" loading="lazy" />
   <div class="info">
@@ -34,7 +33,7 @@ function createCards(arr) {
     </p>
   </div></a>
 </div>`
-      )
-      .join('');
+    )
+    .join('');
 }
 export { createCards };
