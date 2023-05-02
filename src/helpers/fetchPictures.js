@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function fetchPictures(namePic, page) {
+async function fetchPictures(namePic, page=1) {
   const BASE_URL = 'https://pixabay.com/api/';
   const KEY_API = '35864662-5c3b2f3ed57b7580b501bec47';
 

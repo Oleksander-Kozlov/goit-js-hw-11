@@ -1,4 +1,4 @@
-function createCard(arr) {
+function createCards(arr) {
 
     return arr
       .map(
@@ -37,4 +37,4 @@ function createCard(arr) {
       )
       .join('');
 }
-export { createCard };
+export { createCards };

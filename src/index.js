@@ -7,12 +7,13 @@ import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
 // імпортую Helpers
-import { fetchPictures } from "./helpers/fetchPictures(namePic)";
-import { createCard } from "./helpers/createCard(arr)";
+import { fetchPictures } from "./helpers/fetchPictures";
+import { createCard, createCards } from "./helpers/createCards";
 
 // отримую HTML елементи
 const form = document.querySelector('#search-form');
-const galleryContainer = document.querySelector('.gallery');
+
+const target = document.querySelector('js-guard');
 const loadMoreBtn = document.querySelector('.load-more');
 let currentPage = 1;
 let gallery = new SimpleLightbox('.gallery a', {
@@ -30,21 +31,21 @@ function onSearch(evt) {
   const { searchQuery } = evt.currentTarget.elements;
  
     
-  fetchPictures(searchQuery.value, currentPage)
+  fetchPictures(searchQuery.value)
     .then(datas => {
-      
-      if (!datas.data.hits.length) {
+     
+      const { hits, totalHits, total } = datas.data;
+       console.dir(datas);
+       console.log('hits.length', hits.length, typeof hits.length);
+       console.log(total, totalHits);
+      if (!hits.length) {
+        loadMoreBtn.hidden = true;
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
       } else {
-        if (currentPage * 40 > 480) {
-          loadMoreBtn.hidden = true;
-          Notify.failure(
-            "We're sorry, but you've reached the end of search results."
-          );
-        }
-          galleryContainer.innerHTML = createCard(datas.data.hits);
+        
+          galleryContainer.innerHTML = createCards(datas.data.hits);
           gallery.refresh();
           const { height: cardHeight } = document
             .querySelector('.gallery')
@@ -54,15 +55,21 @@ function onSearch(evt) {
             top: cardHeight * 2,
             behavior: 'smooth',
           });
-          Notify.info(`Hooray! We found ${currentPage * 40} images.`);
-        if (currentPage * 40 !== 500) {
+          Notify.info(`Hooray! We found ${totalHits} images.`);
+
           loadMoreBtn.hidden = false;
-        }
+        
       }
+      if (total === hits.length) {
+        loadMoreBtn.hidden = true;
+        Notify.failure(
+          "We're sorry, but you've reached the end of search results."
+        );
+      } 
     })
-      .catch(err => console.log(err));
-//     
+      .catch(err => console.log(err)); 
 }
+
 
 loadMoreBtn.addEventListener("click", onLoad)
 
@@ -70,16 +77,26 @@ function onLoad() {
      currentPage += 1;
     fetchPictures(form.searchQuery.value, currentPage)
         .then(datas => {
-         
+          console.log(datas)
+          const { hits, totalHits, total } = datas.data;
+          console.dir(datas);
+          console.log('hits.length', hits.length, typeof hits.length);
+          console.log(total, totalHits);
             galleryContainer.insertAdjacentHTML(
               'beforeend',
-              createCard(datas.data.hits)
+              createCards(hits)
             );
-            Notify.info(`Hooray! We found ${currentPage * 40} images.`);
+         
+          if (hits.length < 40) {
+            Notify.failure(
+              "We're sorry, but you've reached the end of search results."
+            );
+            loadMoreBtn.hidden = true;
+          }
             //  let gallery = new SimpleLightbox('.gallery a', {
             //    captionDelay: 250,
             //  });
-           gallery.refresh()
+            gallery.refresh();
            
       })
         .catch(err => {
